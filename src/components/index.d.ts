@@ -374,13 +374,17 @@ export declare class CListGroup extends Vue {
   tag?: string
   flush?: boolean
   horizontal?: string | boolean
+  accent?: boolean
 }
 
 export declare class CListGroupItem extends CLink {
   tag?: string
   action?: boolean
   color?: string
+  accent?: string
 }
+
+export declare class CListGroupItemDivider extends Vue {}
 
 export declare class CMedia extends Vue {
   addAsideMargin?: boolean
@@ -410,6 +414,7 @@ export declare class CNav extends Vue {
   variant?: string
   vertical?: boolean
   inCard?: boolean
+  tag?: boolean
 }
 
 export declare class CNavItem extends CLink {}
@@ -446,8 +451,7 @@ export declare class CPagination extends Vue {
   responsive?: boolean
 }
 
-export declare class CProgress extends Vue {
-  height?: string
+export declare class CProgressBar extends Vue {
   color?: string
   striped?: boolean
   animated?: boolean
@@ -458,7 +462,11 @@ export declare class CProgress extends Vue {
   value?: number
 }
 
-export declare class CProgressBar extends CProgress {}
+export declare class CProgress extends CProgressBar {
+  height?: string
+  size?: string
+}
+
 
 type ContentFlat = [NodeFlat]
 declare interface NodeFlat {
@@ -536,6 +544,7 @@ export declare class CSidebarNavItem extends CLink {
   badge?: object
   addLinkClasses?: string
   label?: boolean
+  color?: string
 }
 
 export declare class CSidebarNavTitle extends Vue {}
@@ -592,6 +601,7 @@ export declare class CDataTable extends Vue {
   noItemsView?: {
     noItems?: string, noResults?: string
   }
+  cleaner?: boolean
 }
 
 export declare class CTabs extends Vue {
