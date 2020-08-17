@@ -15,7 +15,7 @@ import CCol from '../src/components/grid/CCol'
 
 storiesOf('CDataTable', module)
   .addDecorator(withKnobs)
-  .add('single', () => {
+  .add('Standard example', () => {
 
     const items = [
       { username: 'Samppa Nori', registered: '2012/01/01', role: 'Member', status: 'Active'},
@@ -241,4 +241,92 @@ storiesOf('CDataTable', module)
       </CCol>
       `
     }
+}).add('Custom example', () => {
+  return {
+    components: { CCol, CCard, CCardBody, CDataTable, CIcon },
+    data: function(){
+      return {
+        items: [
+          { username: 'Samppa Nori', registered: { date: '2012/01/01', timestamp: 1325376000000 }, role: 'Member', status: 'Active'},
+          { username: 'Estavan Lykos', registered: { date: '2012/02/01', timestamp: 1328054400000 }, role: 'Staff', status: 'Banned'},
+          { username: 'Chetan Mohamed', registered: { date: '2012/02/01', timestamp: 1328054400000 }, role: 'Admin', status: 'Inactive'},
+          { username: 'Derick Maximinus', registered: { date: '2012/03/01', timestamp: 1330560000000 }, role: 'Member', status: 'Pending'},
+          { username: 'Friderik Dávid', registered: { date: '2012/01/21', timestamp: 1327104000000 }, role: 'Staff', status: 'Active'},
+        ],
+        fields: [
+          'username',
+          { key: 'registeredTimestamp', label: 'Registered' },
+          'role',
+          'status'
+        ],
+        startDate: 1325376000000,
+        endDate: 1330560000000
+      }
+    },
+    computed: {
+      computedItems () {
+        return this.items.map(item => {
+          return { 
+            ...item, 
+            registeredTimestamp: item.registered.timestamp, 
+            registeredDate: item.registered.date 
+          }
+        })
+      },
+      dateFilteredItems() {
+        return this.computedItems.filter(item => {
+          const date = item.registeredTimestamp
+          return date >= this.startDate && date <= this.endDate
+        })
+      }
+    },
+    methods: {
+      setDateFilter (e, end) {
+        if (end) {
+          this.endDate = new Date(e.target.value).getTime()
+        } else {
+          this.startDate = new Date(e.target.value).getTime()
+        }
+      }
+    },
+    template:`
+    <CCol lg="12" xs="12"> 
+      <CCard> 
+        <CCardBody>
+          <CCardBody>
+            <CDataTable
+              :items="dateFilteredItems"
+              :fields="fields"
+              sorter
+              column-filter
+              hover
+            >
+              <template #registeredTimestamp-filter="{item}">
+                From:
+                <input
+                  type="date"
+                  :value="new Date(startDate).toISOString().substr(0, 10)"
+                  @change="setDateFilter"
+                  class="mr-2"
+                />
+                To:
+                <input
+                  type="date"
+                  :value="new Date(endDate).toISOString().substr(0, 10)"
+                  @change="e => setDateFilter(e, 'end')"
+                />        
+              </template>
+              <template #registeredTimestamp="{item}">
+                <td>
+                  {{ item.registeredDate }}
+                </td>
+              </template>
+            </CDataTable>
+          </CCardBody>
+
+        </CCardBody>
+      </CCard>
+    </CCol>
+    `
+  }
 })
