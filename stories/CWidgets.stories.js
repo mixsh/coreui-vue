@@ -8,6 +8,9 @@ import CWidgetProgressIcon from '../src/components/widgets/CWidgetProgressIcon'
 import CWidgetDropdown from '../src/components/widgets/CWidgetDropdown'
 import CWidgetSimple from '../src/components/widgets/CWidgetSimple'
 
+import CIcon from '@coreui/icons-vue/src/CIcon'
+import { cibFacebook, cilSettings } from '@coreui/icons'
+
 import CDropdown from '../src/components/dropdown/CDropdown'
 import CDropdownItem from '../src/components/dropdown/CDropdownItem'
 
@@ -16,6 +19,11 @@ import CProgress from '../src/components/progress/CProgress'
 import CCard from '../src/components/card/CCard'
 import CCardBody from '../src/components/card/CCardBody'
 import CCol from '../src/components/grid/CCol'
+
+
+console.log(cilSettings);
+
+
 
 storiesOf('Widgets', module)
   .addDecorator(withKnobs)
@@ -78,7 +86,8 @@ storiesOf('Widgets', module)
 }).add('CWidgetIcon', () => {
 
   return {
-    components: { CCol, CCard, CCardBody, CWidgetIcon },
+    cilSettings: cilSettings,
+    components: { CCol, CCard, CCardBody, CWidgetIcon, CIcon },
     props: {
       color: {
         type: String,
@@ -116,7 +125,7 @@ storiesOf('Widgets', module)
             :text="text"
             :iconPadding="iconPadding"
           >
-            Icon
+            <CIcon :content="$options.cilSettings"/>
           </CWidgetIcon>
         </CCardBody>
       </CCard>
@@ -126,7 +135,8 @@ storiesOf('Widgets', module)
 }).add('CWidgetBrand', () => {
 
   return {
-    components: { CCol, CCard, CCardBody, CWidgetBrand },
+    cibFacebook: cibFacebook,
+    components: { CCol, CCard, CCardBody, CWidgetBrand, CIcon },
     props: {
       color: {
         type: String,
@@ -169,7 +179,11 @@ storiesOf('Widgets', module)
             :leftHeader="leftHeader"
             :leftFooter="leftFooter"
           >
-            Brand
+            <CIcon 
+              :content="$options.cibFacebook"
+              height="56"
+              class="my-4"
+            />
           </CWidgetBrand>
         </CCardBody>
       </CCard>
@@ -179,7 +193,8 @@ storiesOf('Widgets', module)
 }).add('CWidgetProgressIcon', () => {
 
   return {
-    components: { CCol, CCard, CCardBody, CWidgetProgressIcon },
+    cilSettings: cilSettings,
+    components: { CCol, CCard, CCardBody, CWidgetProgressIcon, CIcon },
     props: {
       color: {
         type: String,
@@ -222,7 +237,7 @@ storiesOf('Widgets', module)
             :header="header"
             :text="text"
           >
-            Icon
+            <CIcon :content="$options.cilSettings" height="36"/>
           </CWidgetProgressIcon>
         </CCardBody>
       </CCard>

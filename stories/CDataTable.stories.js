@@ -7,6 +7,8 @@ import CButton from '../src/components/button/CButton'
 import CCollapse from '../src/components/collapse/CCollapse'
 import CMedia from '../src/components/media/CMedia'
 
+import CIcon from '@coreui/icons-vue/src/CIcon'
+
 import CCard from '../src/components/card/CCard'
 import CCardBody from '../src/components/card/CCardBody'
 import CCol from '../src/components/grid/CCol'
@@ -45,7 +47,7 @@ storiesOf('CDataTable', module)
 
 
     return {
-      components: { CCol, CCard, CCardBody, CDataTable, CBadge, CButton, CCollapse, CMedia },
+      components: { CCol, CCard, CCardBody, CDataTable, CBadge, CButton, CCollapse, CMedia, CIcon },
       data: function(){
         return {
           items: items.map((item, id) => { return {...item, id}}),
