@@ -65,6 +65,7 @@ export default {
   props: {
     show: Boolean,
     centered: Boolean,
+    scrollable: Boolean,
     title: String,
     size: {
       type: String,
@@ -117,6 +118,7 @@ export default {
         'modal-dialog',
         {
           'modal-dialog-centered': this.centered,
+          'modal-dialog-scrollable': this.scrollable,
           [`modal-${this.size}`]: this.size
         }
       ]
